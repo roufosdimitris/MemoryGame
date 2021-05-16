@@ -6,36 +6,38 @@ class MemoryGame
 {
   public static void main(String[] args){
     Scanner input = new Scanner(System.in);
-    System.out.print("choose number of pairs: ");
-    int n = input.nextInt();
+    int n = Integer.parseInt(args[0]);
     Board board = new Board(n); // Creates the Board
 
-    System.out.println("Do you want to play with a human player or the *best* AI ever made?");
-    System.out.println("Write 1 for human or 2 if you want to get rekt:");
+    System.out.println("\n\nWelcome to Memory Game!!\n");
+    System.out.println("Do you want to play with a human player or against the computer?\n");
+    System.out.print("Write 1 for human or 2 for computer: ");
     int opponent = input.nextInt();
     while (true){
       if (opponent == 1){
-        System.out.println("Setting a 2 player game...");
-        //HumanPlayer player1 = new HumanPlayer("player1"); // will have to change args to take input
-        //HumanPlayer player2 = new HumanPlayer("player2");
+        System.out.println("\nSetting a 2 player game...\n");
         break;
 
       }else if (opponent == 2){
-        System.out.println("Setting a player versus computer game...");
-        //HumanPlayer player1 = new HumanPlayer("player");
-        //ComputerPlayer player2 = new ComputerPlayer("computer", n);
+        System.out.println("\nSetting a player versus computer game...\n");
         break;
       }else{
-        System.out.println("Invalid input. Choose again.");
-        System.out.println("Write 1 for human or 2 if you want to get rekt:");
+        System.out.println("\nInvalid input. Choose again.");
+        System.out.print("Write 1 for human or 2 for computer:");
         opponent = input.nextInt();
       }
     }
+    input.nextLine(); // Used to fix a problem with nextInt skipping the next nextLine
+
     boolean gameEnd = false;
 
     if (opponent == 1){
-      HumanPlayer player1 = new HumanPlayer("player1"); // will have to change args to take input
-      HumanPlayer player2 = new HumanPlayer("player2");
+      System.out.print("\nPlayer one choose your name: ");
+      HumanPlayer player1 = new HumanPlayer(input.nextLine());
+      System.out.print("\nPlayer two choose your name: ");
+      HumanPlayer player2 = new HumanPlayer(input.nextLine());
+
+      board.print();
 
       while (gameEnd == false){
         player1.play(board);
@@ -46,18 +48,22 @@ class MemoryGame
         if (board.allPairsFound() == true){
           break;
         }
+        System.out.println(player1+" points: "+player1.getPoints()+"    "+player2+" points: "+player2.getPoints()+"\n\n");
       }
       if (player1.getPoints() > player2.getPoints()){
-        System.out.println(player1+"is the winner!!");
+        System.out.println("\n"+player1+" is the winner!!");
       }else if(player1.getPoints() < player2.getPoints()){
-        System.out.println(player2+"is the winner!!");
+        System.out.println("\n"+player2+" is the winner!!");
       }else{
-        System.out.println("It's a draw!!");
+        System.out.println("\nIt's a draw!!");
       }
 
     }else if (opponent == 2){
-      HumanPlayer player1 = new HumanPlayer("player");
-      ComputerPlayer player2 = new ComputerPlayer("computer", n);
+      System.out.print("Choose your name: ");
+      HumanPlayer player1 = new HumanPlayer(input.nextLine());
+      ComputerPlayer player2 = new ComputerPlayer("Brainiac", n);
+
+      board.print();
 
       while (gameEnd == false){
         player1.play(board);
@@ -68,32 +74,15 @@ class MemoryGame
         if (board.allPairsFound() == true){
           break;
         }
+        System.out.println(player1+" points: "+player1.getPoints()+"    "+player2+" points: "+player2.getPoints()+"\n\n");
       }
       if (player1.getPoints() > player2.getPoints()){
-        System.out.println(player1+"is the winner!!");
+        System.out.println("\n"+player1+" is the winner!!");
       }else if(player1.getPoints() < player2.getPoints()){
-        System.out.println(player2+"is the winner!!");
+        System.out.println("\n"+player2+" is the winner!!");
       }else{
-        System.out.println("It's a draw!!");
+        System.out.println("\nIt's a draw!!");
       }
     }
-    
-    /*while (gameEnd == false){
-      player1.play(board);
-      if (board.allPairsFound() == true){
-        break;
-      }
-      player2.play(board);
-      if (board.allPairsFound() == true){
-        break;
-      }
-    }
-    if (player1.getPoints() > player2.getPoints()){
-      System.out.println(player1+"is the winner!!");
-    }else if(player1.getPoints() < player2.getPoints()){
-      System.out.println(player2+"is the winner!!");
-    }else{
-      System.out.println("It's a draw!!");
-    }*/
   }
 }

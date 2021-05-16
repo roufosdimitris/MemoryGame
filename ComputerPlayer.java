@@ -28,7 +28,7 @@ class ComputerPlayer
     int x = board.getRandomPosition();
     for (int j = 0; j < n; j++){
       if ((board.getCard(x) == seenCards[j]) && (x != j)){
-        System.out.println("Opening cards "+x+" and "+j);
+        System.out.println(name+" chose cards "+x+" and "+j);
         System.out.println("first choice\n");
         board.openPositions(x,j);
         points++;
@@ -36,7 +36,8 @@ class ComputerPlayer
       }
     }
     int y = board.getRandomPosition(x);
-    System.out.println("Opening cards "+x+" and "+y+"\nsecond choice\n");
+    System.out.println(name+" chose cards "+x+" and "+y+"\nsecond choice\n");
+    board.delay(2);
     boolean bool = board.openPositions(x,y);
     if (bool == false){
       seenCards[x] = board.getCard(x);

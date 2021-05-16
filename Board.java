@@ -55,7 +55,6 @@ class Board
   }
 
   public void print(){ // Prints the table
-    //System.out.println(Arrays.toString(cardArray));
     for (int i = 0; i < cardArray.length; i++){
       System.out.printf("%3d ", i);
     }
@@ -75,7 +74,6 @@ class Board
   }
 
   public void flash(int pos1, int pos2){
-    //System.out.println(Arrays.toString(cardArray));
     for (int i = 0; i < arrayLength; i++){
       System.out.printf("%3d ", i);
     }
@@ -150,6 +148,10 @@ class Board
     return cardArray[x];
   }
 
+  public boolean getFoundCard(int x){
+    return foundCards[x];
+  }
+
   public boolean allPairsFound(){
     boolean notFound = false;
     for (int j = 0; j < arrayLength; j++){
@@ -168,7 +170,7 @@ class Board
     }
   }
 
-  private void delay(int sec){
+  public void delay(int sec){
 		try {
 			Thread.currentThread().sleep(1000*sec);
 		}
@@ -181,9 +183,8 @@ class Board
     return n;
   }
 
-  /*public static void main(String[] args){
+  public static void main(String[] args){
     Board testBoard = new Board(3);
-    //System.out.println("Hello");
     testBoard.print();
     for (int i = 0; i < 6; i++){
       System.out.print(testBoard.getCard(i)+"  ");
@@ -211,5 +212,5 @@ class Board
     System.out.println(testBoard.allPairsFound());
     testBoard.openPositions(1,3);
     System.out.println(testBoard.allPairsFound());
-  }*/
+  }
 }

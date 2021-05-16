@@ -25,6 +25,7 @@ class ComputerPlayer
   }
 
   public void play(Board board){
+    boolean option1 = false; // used to control whether option 1 or 2 is chosen
     int x = board.getRandomPosition();
     for (int j = 0; j < n; j++){
       if ((board.getCard(x) == seenCards[j]) && (x != j)){
@@ -32,18 +33,21 @@ class ComputerPlayer
         System.out.println("first choice\n");
         board.openPositions(x,j);
         points++;
+        option1 = true;
         break;
       }
     }
-    int y = board.getRandomPosition(x);
-    System.out.println(name+" chose cards "+x+" and "+y+"\nsecond choice\n");
-    board.delay(2);
-    boolean bool = board.openPositions(x,y);
-    if (bool == false){
-      seenCards[x] = board.getCard(x);
-      seenCards[y] = board.getCard(y);
-    }else{
-      points++;
+    if (!(option1)){
+      int y = board.getRandomPosition(x);
+      System.out.println(name+" chose cards "+x+" and "+y+"\nsecond choice\n");
+      board.delay(2);
+      boolean bool = board.openPositions(x,y);
+      if (bool == false){
+        seenCards[x] = board.getCard(x);
+        seenCards[y] = board.getCard(y);
+      }else{
+        points++;
+      }
     }
   }
 
